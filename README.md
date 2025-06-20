@@ -36,3 +36,7 @@
 
 ![Image](https://github.com/user-attachments/assets/5d73e896-bf1f-4cbd-b2bb-dfce28503d2f)
 
+## 마이페이지 화면
+
+![Image](https://github.com/user-attachments/assets/5bde16b9-ecfb-4662-bb49-0125b91dbceb)
+
