@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         String role = member.getRole();
         if (role == null || role.isEmpty()) {
-            role = "USER"; // 혹은 기본 역할 지정
+            role = "USER";
         }
         return User.builder()
                 .username(member.getUEmail())

@@ -13,13 +13,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 const resultDiv = document.getElementById('emailCheckResult');
                 if (data.duplicate) {
                     resultDiv.style.color = 'red';
-                    //   resultDiv.textContent = '이미 사용 중인 이메일입니다.';
                     checkEmailBtn.textContent = '중복 확인 ❌'; 
                     checkEmailBtn.classList.remove('btn-dark', 'btn-success');
                     checkEmailBtn.classList.add('btn-danger');
                 } else {
                     resultDiv.style.color = 'green';
-                    //   resultDiv.textContent = '사용 가능한 이메일입니다.';
                     checkEmailBtn.textContent = '중복 확인 ✅'; 
                     checkEmailBtn.classList.remove('btn-dark', 'btn-danger');
                     checkEmailBtn.classList.add('btn-success');

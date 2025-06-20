@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!-- xmlns:sec="http://www.thymeleaf.org/extras/spring-security"> -->
 
 <head>
     <meta charset="UTF-8">
@@ -53,17 +53,25 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/list}"><i class="bi bi-list-ul"></i> 게시판</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/board}"><i class="bi bi-megaphone-fill"></i> 공지사항</a>
+            </li>
         </ul>
     </div>
 
     <!-- 본문 영역 -->
     <div class="main">
         <div class="topbar d-flex justify-content-end align-items-center px-4">
+            <div th:if="${loginUser != null}">
+                <span>환영합니다, <strong th:text="${loginUser.uName}">사용자명</strong>님</span>
+            </div>
             <div class="mt-2">
+
                 <p sec:authorize="isAnonymous()">
                     <a href="/login" class="me-3 text-dark" title="로그인/회원가입">Sign in</a>
                 </p>
                 <div sec:authorize="isAuthenticated()" class="d-flex align-items-center gap-3">
+
                     <a href="#" class="text-dark" title="알림">
                         <i class="bi bi-bell fs-3"></i>
                     </a>
@@ -98,13 +106,39 @@
         <div layout:fragment="home"></div>
         <div layout:fragment="content"></div>
         <div layout:fragment="content-detail"></div>
-                <div layout:fragment="mypage"></div>
+        <div layout:fragment="mypage"></div>
+        <div layout:fragment="board"></div>
     </main>
+    <div class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="noticeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="noticeModalLabel">공지사항</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        <li class="list-group-item" th:each="notice : ${modalActiveNotices}"
+                            th:data-start="${#temporals.format(notice.startTime, 'yyyy-MM-dd''T''HH:mm:ss')}"
+                            th:data-end="${#temporals.format(notice.endTime, 'yyyy-MM-dd''T''HH:mm:ss')}">
+                            <strong th:text="${notice.title}">공지 제목</strong><br />
+                            <span th:text="${notice.content}">공지 내용</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:inline="javascript">
+        let noticeCount = /*[[${activeNotices != null ? #lists.size(activeNotices) : 0}]]*/ 0;
+        console.log("noticeCount:", noticeCount);
+    </script>
 </body>
 <div layout:fragment="script"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script th:src="@{/js/post.js}"></script>
 <script th:src="@{/js/list.js}"></script>
-<!-- <script th:src="@{/js/bwf.js}"></script> -->
+
+
 </html>

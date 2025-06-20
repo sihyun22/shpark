@@ -17,10 +17,10 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            // .csrf(AbstractHttpConfigurer::disable)  // 6.x 방식으로 CSRF 비활성화
+                // .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/signup", "/home", "/css/**", "/js/**", "/check-email").permitAll()
-                         .requestMatchers("/posts/**").hasRole("USER")
+                        .requestMatchers("/", "/home", "/login", "/signup","/mypage", "/board", "/read", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/posts/**").hasRole("USER")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
@@ -31,7 +31,7 @@ public class WebSecurityConfig {
                         .failureUrl("/login?error=true")
                         .permitAll())
                 .logout(logout -> logout
-                .logoutUrl("/logout")
+                        .logoutUrl("/logout")
                         .logoutSuccessUrl("/home")
                         .permitAll());
         return http.build();

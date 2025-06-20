@@ -1,7 +1,6 @@
 package com.example.project.demo.controller;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-// import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Controller;
 
 import com.example.project.demo.domain.Member;

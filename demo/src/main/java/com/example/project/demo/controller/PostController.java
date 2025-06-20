@@ -29,8 +29,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-// import com.vane.badwordfiltering.*;
-
 @Controller
 @Log4j2
 @RequiredArgsConstructor
@@ -38,15 +36,9 @@ public class PostController {
 
     private final PostRepository postRepository;
 
-    // @GetMapping("/list")
-    // public String getMethodName(Model model) {
-    // List<Post> posts = postRepository.findAll();
-    // model.addAttribute("posts", posts);
-    // return "list";
-    // }
-
     @GetMapping("/list")
     public String showList(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
+        log.info("게시판 목록 @@");
         List<Post> posts;
         if (keyword == null || keyword.isEmpty()) {
             posts = postRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));

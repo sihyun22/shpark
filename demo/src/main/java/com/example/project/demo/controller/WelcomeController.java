@@ -1,12 +1,11 @@
 package com.example.project.demo.controller;
 
-
-
+import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -14,27 +13,25 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.example.project.demo.domain.Board;
 import com.example.project.demo.domain.Member;
 import com.example.project.demo.domain.Post;
+import com.example.project.demo.repository.BoardRepository;
 import com.example.project.demo.repository.MemberRepository;
 import com.example.project.demo.repository.PostRepository;
-
-
-
-
 
 @Controller
 @Log4j2
 @RequiredArgsConstructor
 public class WelcomeController {
-    
+
     private final PostRepository postRepository;
-    
+    private final BoardRepository boardRepository;
+
     @GetMapping("/welcome")
     public String showWelcomePage() {
         return "/layout/basic";
     }
-    
 
     @GetMapping("/test")
     public void showTestPage() {
@@ -43,37 +40,41 @@ public class WelcomeController {
 
     private final MemberRepository memberRepository;
 
-    // public String getLoggedInUserEmail(){
-    //     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-    //     if(principal instanceof UserDetails){
-    //         return ((UserDetails) principal).getUsername();
-    //     } else {
-    //         return principal.toString();
-    //     }
-    // }
-
     @GetMapping("/home")
-    public String showDashBoardPost(Model model) 
-    {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    public String showDashBoardPost(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = (auth != null && auth.isAuthenticated() &&
+                !(auth instanceof AnonymousAuthenticationToken))
+                        ? auth.getName()
+                        : null;
 
-        Member member = memberRepository.findByuEmail(email)
-            .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
+        if (email != null) {
+            Member member = memberRepository.findByuEmail(email)
+                    .orElse(null);
+            model.addAttribute("user", member);
+        } else {
+            log.info("비로그인 사용자가 /home 접근");
+            model.addAttribute("user", null);
+        }
+
         List<Post> recentPosts = postRepository.findTop5ByOrderByIdDesc();
+
+        List<Board> activeNotices = boardRepository.findByStartTimeBeforeAndEndTimeAfter(LocalDateTime.now(), LocalDateTime.now());
         model.addAttribute("recentPosts", recentPosts);
-        model.addAttribute("user", member);
+        log.info("activeNotices@@@: {}", activeNotices);
+        model.addAttribute("activeNotices", activeNotices);
+                model.addAttribute("modalActiveNotices", activeNotices);
         return "home";
     }
 
     @GetMapping("/login")
-    public void showLoginPage(){
+    public void showLoginPage() {
 
     }
 
     @GetMapping("/signup")
-    public void showSingUpPage(){
+    public void showSingUpPage() {
 
     }
-    
+
 }

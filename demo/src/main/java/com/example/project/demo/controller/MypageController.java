@@ -8,12 +8,10 @@ import org.springframework.stereotype.Controller;
 import com.example.project.demo.domain.Member;
 import com.example.project.demo.repository.MemberRepository;
 
-import ch.qos.logback.core.model.Model;
-import groovy.util.logging.Log4j2;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import lombok.extern.log4j.Log4j2;
 
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @Log4j2
@@ -35,6 +33,7 @@ public class MypageController {
     @GetMapping("/mypage")
     public String showMyPage(org.springframework.ui.Model model){
         String email = getLoggedInUserEmail();
+        log.info("현재 인증된 사용자 이메일: {}", email);
         Member member = memberRepository.findByuEmail(email)
             .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
 
