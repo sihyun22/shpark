@@ -6,7 +6,7 @@
 
 ## 회원가입 화면
 
-![공지사항 팝업 예시](https://github.com/user-attachments/assets/bb1448c3-b976-4fb9-8518-76986b44afc9)
+![회원가입 화면 예시](https://github.com/user-attachments/assets/bb1448c3-b976-4fb9-8518-76986b44afc9)
 
 ## 로그인 시 홈 화면(대시보드)
 - 상단에 로그인 회원의 이름 렌더링 
@@ -16,4 +16,11 @@
 - 공지 사항 리스트
 - 공지 사항 모달 창 
 
-![공지사항 리스트 UI](https://github.com/user-attachments/assets/68b20b52-c134-4d10-a65c-5d446596241e)
+![홈 화면 예시](https://github.com/user-attachments/assets/68b20b52-c134-4d10-a65c-5d446596241e)
+
+## 게시판 조회 화면
+- 목록 조회 검색어
+- 게시글 등록
+- 게시글 상세 조회
+
+![게시글 조회 화면](https://github.com/user-attachments/assets/fa38edfe-6f32-4280-98ed-4daabd048008)
