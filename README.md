@@ -8,6 +8,12 @@
 
 ![회원가입 화면 예시](https://github.com/user-attachments/assets/bb1448c3-b976-4fb9-8518-76986b44afc9)
 
+## 이메일 중복 확인
+
+![Image](https://github.com/user-attachments/assets/efccac68-4a28-41e6-a9b2-62441c0e3653)
+
+![Image](https://github.com/user-attachments/assets/575cf680-2d65-4596-bcf0-50b13d381190)
+
 ## 로그인 시 홈 화면(대시보드)
 - 상단에 로그인 회원의 이름 렌더링 
 - 카드 형식으로 프로필(로그인 회원 정보)
