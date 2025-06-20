@@ -68,13 +68,13 @@ public class WelcomeController {
     }
 
     @GetMapping("/login")
-    public void showLoginPage() {
-
+    public String showLoginPage() {
+        return "login";
     }
 
     @GetMapping("/signup")
-    public void showSingUpPage() {
-
+    public String showSingUpPage() {
+        return "signup";
     }
 
 }
