@@ -1,6 +1,11 @@
 # shpark
 
-## 최초 로그인 화면
+
+## 비로그인 시 홈 화면
+
+![Image](https://github.com/user-attachments/assets/fec37e0d-eea9-4b6d-86c8-68546bf45737)
+
+## 로그인 화면
 
 ![최초 로그인 화면 예시](https://github.com/user-attachments/assets/09e3a76d-31aa-48cc-811c-084af5eaa2c3)
 
@@ -14,7 +19,7 @@
 
 ![Image](https://github.com/user-attachments/assets/575cf680-2d65-4596-bcf0-50b13d381190)
 
-## 로그인 시 홈 화면(대시보드)
+## 로그인 시 홈 화면
 - 상단에 로그인 회원의 이름 렌더링 
 - 카드 형식으로 프로필(로그인 회원 정보)
 - 최신 게시글 리스트
