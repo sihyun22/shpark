@@ -32,3 +32,7 @@
 
 ![Image](https://github.com/user-attachments/assets/fcf7032b-819f-4104-a4a6-5bd8a4afa8c1)
 
+## 공지사항 등록 화면
+
+![Image](https://github.com/user-attachments/assets/5d73e896-bf1f-4cbd-b2bb-dfce28503d2f)
+
