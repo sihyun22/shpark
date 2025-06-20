@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+            <meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
+    <title>글쓰기</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4">게시글 작성</h2>
+
+    <form th:action="@{/posts/postRegister}" method="post">
+
+        <div class="mb-3">
+            <label for="title" class="form-label">제목</label>
+            <input type="text" oninput="checkBadWordsRealtime()" class="form-control" id="title" name="title" maxlength="40" placeholder="제목을 입력하세요.(최대 40자)" required>
+                <div id="titleError" style="color:red"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="writer" class="form-label">작성자</label>
+            <input type="text" oninput="checkBadWordsRealtime()" class="form-control" id="writer" name="writer" required>
+                <div id="writerError" style="color:red"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="content" class="form-label">내용</label>
+            <textarea class="form-control" oninput="checkBadWordsRealtime()" id="content" name="content" rows="6" required></textarea>
+                <div id="contentError" style="color:red"></div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" id="submitBtn" class="btn btn-primary">등록</button>
+            <a href="/list" class="btn btn-secondary">뒤로가기</a>
+        </div>
+    </form>
+</div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var errorMessage = /*[[${errorMessage}]]*/ '';
+        if (errorMessage) {
+            alert(errorMessage);
+        }
+        /*]]>*/
+
+        async function checkBadWordsRealtime() {
+              const token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+    const header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+        const title = document.getElementById('title').value;
+        const writer = document.getElementById('writer').value;
+        const content = document.getElementById('content').value;
+
+        const response = await fetch('/posts/checkBadWords', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title, writer, content })
+        });
+
+        const data = await response.json();
+
+        // 에러 메시지 영역들
+        document.getElementById('titleError').textContent = data.errors.title || '';
+        document.getElementById('writerError').textContent = data.errors.writer || '';
+        document.getElementById('contentError').textContent = data.errors.content || '';
+
+        // 제출 버튼 활성화/비활성화
+        document.getElementById('submitBtn').disabled = data.hasBadWord;
+    }
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/bwf.js}"></script>
+</body>
+
+</html>
