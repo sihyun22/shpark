@@ -28,3 +28,7 @@
 ![Image](https://github.com/user-attachments/assets/249ee585-34a6-4966-bab1-96a4e42ca3b4)
 ![Image](https://github.com/user-attachments/assets/6f2fc2bf-3bf2-4fca-b91b-e0e8686f4214)
 
+## 게시글 등록 화면
+
+![Image](https://github.com/user-attachments/assets/fcf7032b-819f-4104-a4a6-5bd8a4afa8c1)
+
