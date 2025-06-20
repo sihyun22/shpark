@@ -22,5 +22,9 @@
 - 목록 조회 검색어
 - 게시글 등록
 - 게시글 상세 조회
+- 게시글 수정 / 삭제
 
 ![게시글 조회 화면](https://github.com/user-attachments/assets/fa38edfe-6f32-4280-98ed-4daabd048008)
+![Image](https://github.com/user-attachments/assets/249ee585-34a6-4966-bab1-96a4e42ca3b4)
+![Image](https://github.com/user-attachments/assets/6f2fc2bf-3bf2-4fca-b91b-e0e8686f4214)
+
